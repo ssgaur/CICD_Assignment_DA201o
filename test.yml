@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Pull Docker image
       run: docker pull ssgaur94/ssgaur94_iisc_img:latest
