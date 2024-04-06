@@ -21,7 +21,10 @@ jobs:
         DOCKER_BUILDKIT: 1
 
     - name: Log in to Docker Hub
-      run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --p "${{ secrets.DOCKER_PASSWORD }}"
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Push image to Docker Hub
       run: docker push ssgaur94/ssgaur94_iisc_img:latest
