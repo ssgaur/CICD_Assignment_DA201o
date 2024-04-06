@@ -1,14 +1,19 @@
-# Use an official Python runtime as a parent image
-FROM python:3.9-slim
+FROM python:3.8
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Copy the requirements file into the container
+COPY requirements.txt .
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies
+RUN pip install -r requirements.txt
 
-# Run train.py during container startup
-CMD ["python", "train.py"]
+# Copy the entire current directory into the container
+COPY . .
+
+# Run the training command during the build phase
+RUN python train.py
+
+# Command to run when the container starts
+CMD ["python", "test.py"]
