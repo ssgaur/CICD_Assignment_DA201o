@@ -2,10 +2,12 @@ name: Test
 
 env:
   NAME: public
+  
 on:
   workflow_run:
-    workflows: ["Train"]
-    types: ["completed"]
+    workflows: Train
+    types:
+      - completed
 
 jobs:
   test:
@@ -26,4 +28,4 @@ jobs:
         echo "Score:"
         echo "$OUTPUT"
         if [[ `echo "$OUTPUT 0.50" | awk '{print ($1 < $2)}'` == 1 ]]; then echo "Insufficient Accuracy" && exit 1; fi
-        
+
