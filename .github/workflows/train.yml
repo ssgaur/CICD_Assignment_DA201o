@@ -28,5 +28,6 @@ jobs:
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
     - name: Push image to Docker Hub
       run: docker push ssgaur94/ssgaur94_iisc_img:latest

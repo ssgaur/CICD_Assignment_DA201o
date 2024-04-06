@@ -2,19 +2,16 @@ name: Test
 
 env:
   NAME: public
+  
 on:
-  pull_request:
-    branches:
-      - '*'
   workflow_run:
-    workflows: ["Train"]
+    workflows: Train
     types:
       - completed
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
