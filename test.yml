@@ -1,0 +1,20 @@
+name: Test
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Pull Docker image
+      run: docker pull ssgaur94/ssgaur94_iisc_img:latest
+
+    - name: Run Docker container
+      run: docker run ssgaur94/ssgaur94_iisc_img:latest

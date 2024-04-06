@@ -1,0 +1,25 @@
+name: Train
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Build Docker image
+      run: docker build -t ssgaur94/ssgaur94_iisc_img:latest .
+      env:
+        DOCKER_BUILDKIT: 1
+
+    - name: Log in to Docker Hub
+      run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+    - name: Push image to Docker Hub
+      run: docker push ssgaur94/ssgaur94_iisc_img:latest
