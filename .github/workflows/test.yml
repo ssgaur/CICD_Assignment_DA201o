@@ -3,9 +3,6 @@ name: Test
 env:
   NAME: public
 on:
-  pull_request:
-    branches:
-      - '*'
   workflow_run:
     workflows: ["Train"]
     types: ["completed"]
