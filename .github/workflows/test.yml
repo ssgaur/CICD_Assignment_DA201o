@@ -1,5 +1,7 @@
 name: Test
 
+env:
+  NAME: public
 on:
   pull_request:
     branches:
