@@ -8,13 +8,12 @@ on:
       - '*'
   workflow_run:
     workflows: ["Train"]
-    types:
-      - completed
+    types: ["completed"]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    if: github.event.workflow_run.conclusion == 'success'
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -31,4 +30,9 @@ jobs:
         echo "Score:"
         echo "$OUTPUT"
         if [[ `echo "$OUTPUT 0.50" | awk '{print ($1 < $2)}'` == 1 ]]; then echo "Insufficient Accuracy" && exit 1; fi
-
+  
+  training-failed:
+    runs-on: ubuntu-latest
+     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+     steps:
+       - run: echo "First workflow was a failure"
