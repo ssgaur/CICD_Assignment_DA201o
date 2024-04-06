@@ -3,11 +3,14 @@ name: Test
 env:
   NAME: public
   
-# on:
-#   workflow_run:
-#     workflows: Train
-#     types:
-#       - completed
+on:
+  pull_request:
+    branches:
+      - '*'
+  workflow_run:
+    workflows: ["Train"]
+    types:
+      - completed
 
 jobs:
   test:

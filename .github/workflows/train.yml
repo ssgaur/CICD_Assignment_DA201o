@@ -31,22 +31,3 @@ jobs:
 
     - name: Push image to Docker Hub
       run: docker push ssgaur94/ssgaur94_iisc_img:latest
-
-  trigger_second_workflow:
-    runs-on: ubuntu-latest
-    needs: build
-    if: ${{ always() }}
-    steps:
-      - name: Trigger Test
-        uses: actions/github-script@v5
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { data: workflows } = await github.actions.listRepoWorkflows({ owner: 'ssgaur94', repo: 'https://github.com/ssgaur/CICD_Assignment_DA201o.git' });
-            const secondWorkflow = workflows.workflows.find(workflow => workflow.name === 'Test.yml');
-            if (secondWorkflow) {
-              await github.actions.createWorkflowDispatch({
-                workflow_id: secondWorkflow.id,
-                ref: 'main' // Assuming you want to trigger the second workflow on the main branch
-              });
-            }
