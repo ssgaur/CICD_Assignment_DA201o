@@ -13,7 +13,7 @@ model = LogisticRegression(
     # penalty='l2',          # Regularization type (l2: Ridge regularization)
     C=0.01,                 # Inverse of regularization strength (lower values specify stronger regularization)
     # solver='lbfgs',        # Algorithm to use in the optimization problem (lbfgs: Limited-memory Broyden–Fletcher–Goldfarb–Shanno algorithm)
-    max_iter=1000,          # Maximum number of iterations for optimization
+    max_iter=1500,          # Maximum number of iterations for optimization
     random_state=42        # Random seed for reproducibility
     ).fit(X, y)
 
