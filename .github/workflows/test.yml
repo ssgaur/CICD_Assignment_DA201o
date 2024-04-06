@@ -13,7 +13,6 @@ on:
 
 jobs:
   test:
-    needs: Train
     runs-on: ubuntu-latest
 
     steps:
