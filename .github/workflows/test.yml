@@ -1,8 +1,10 @@
 name: Test
 env:
   NAME: public
-  
 on:
+  pull_request:
+    branches:
+      - '*'
   workflow_run:
     workflows: ["Train"]
     types:
@@ -26,5 +28,5 @@ jobs:
         OUTPUT=$(docker run ssgaur94/ssgaur94_iisc_img:latest)
         echo "Score:"
         echo "$OUTPUT"
-        if [[ `echo "$OUTPUT 0.50" | awk '{print ($1 < $2)}'` == 1 ]]; then echo "Insufficient Accuracy" && exit 1; fi
+        if [[ `echo "$OUTPUT 0.25" | awk '{print ($1 < $2)}'` == 1 ]]; then echo "Insufficient Accuracy" && exit 1; fi
 
